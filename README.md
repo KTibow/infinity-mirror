@@ -8,12 +8,14 @@ Okay, so first of all, here's some credits:
 - Thanks to [Home Assistant](https://home-assistant.io/), of course!
 - Thanks to [Dave's Garage](https://www.youtube.com/channel/UCNzszbnvQeFzObW0ghk0Ckw) and [this post from him](https://www.youtube.com/post/Ugzhaf4slmPXC9Kkzo54AaABCQ).
   
-And here's the fourm discussion: https://community.home-assistant.io/t/i-made-a-smart-infinity-mirror/212410?u=ktibow
+And here's the fourm discussion: https://community.home-assistant.io/t/212410?u=ktibow
   
-Okay, now for some pictures:  
+<details><summary>Okay, now for some pictures:</summary>
+  
 ![Screenshot of full control in HA](/rsz_2020-07-17-140729_1920x1080_scrot.png)
 ![Picture of screen](/IMG_20200717_141543.jpg)
 ![Picture of infinity mirror](/IMG_20200717_141323.jpg)  
+</details>
 
 Now let's go to the parts.
 1. (Only tested on) [HelTec Wifi Kit 32](https://heltec.org/project/wifi-kit-32/)
