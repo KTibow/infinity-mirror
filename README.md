@@ -23,5 +23,31 @@ Now let's go to the parts.
 6. (Only tested on) [Infinity mirror to hack](https://www.amazon.com/dp/B07LF4YMCZ)
 
 Okay, let's do this.
-1. Pry apart the infinity mirror.
-  - First, remove the battery base. Do that by pushing apart the bottom part, and while you do that, pull away the battery holder.
+## Pry apart the infinity mirror
+### Bottom
+1. First, remove the battery base. Do that by pushing apart the bottom part, and while you do that, pull away the battery holder.
+2. Disconnect all of the wires. Just pull/chop them off.
+3. Push out the stuff. You might need to push on some stuff really hard in order to push out the switch and power plug.
+4. Make the hole between the base and top bigger for the light strip connector.
+
+Note: Don't put the battery base back on, not even later.
+### Middle
+1. Pry off the coverings. The mirror is made of 3 parts, the middle, and the two covers. Pry off the glue.
+2. Pull off one of the mirrors. Be very gentle, or you'll have a scratched-up mirror like I do.
+3. Detach the provided light strip. Just pull off the adhesive.
+## Cut and place the light strip
+1. Place the light strip around the mirror.
+2. Find which side is the input and output of the LED strip, and cut off any excess. It's okay to cut off the other connector, too.
+3. Count the number of LEDs in the strip.
+4. Peel off the adhesive backing and place the light strip. Make sure to put the connector through the hole you made earlier.
+5. Route the connector through the light switch hole.
+
+Yahoo! You've done most of the hardware.
+## Set up the connections
+1. Find your WiFi Kit 32 and solder headers.
+2. Place it in the middle of your breadboard.
+3. Put one wire at pin 5. Put the other two at 5V and GND.
+4. Put the pin 5 wire to the middle, green wire of the connector.
+5. Put the 5V wire to the red wire of the connector, and the GND wire to the white wire of the connector.
+## Set up your enviroment
+1. Make sure the [Arduino IDE](https://www.arduino.cc/en/Main/Software) is installed.
