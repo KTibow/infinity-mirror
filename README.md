@@ -275,6 +275,19 @@ show_header_toggle: false
 title: Infinity mirror
 type: entities
 ```
+11. And add this automation too, so HA can tell the mirror when anything changes:
+```yaml
+- id: 'let_mirror_know_when_status_changes'
+  alias: Let mirror know when anything changes
+  description: ''
+  trigger:
+  - entity_id: sensor.mtms
+    platform: state
+  condition: []
+  action:
+  - data: {}
+    service: shell_command.update_mirror
+```
 ## Set up your enviroment and upload
 1. Make sure the [Arduino IDE](https://www.arduino.cc/en/Main/Software) is installed, and set up for HelTec's board. [Here's HelTec's guide.](https://heltec-automation-docs.readthedocs.io/en/latest/esp32+arduino/quick_start.html#via-arduino-board-manager)
 2. Download [the zip](https://github.com/KTibow/infinity-mirror/archive/master.zip), unzip it, and open `mirror.ino` in `mirror`.
