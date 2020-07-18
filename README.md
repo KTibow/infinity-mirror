@@ -165,6 +165,14 @@ Yahoo! You've done most of the hardware.
             value: "{{(s | int / 100 * 255) | int}}"
             entity_id: input_number.saturation
 ```
+6. Add this template sensor to your `configuration.yaml`:
+```yaml
+sensor:
+  - platform: template
+    sensors:
+      mtms:
+        value_template: '{{states(''weather.kbfi_hourly'')}}|{{states(''input_text.mirror_status'')}}|{{states(''input_number.mirror_brightness'')}}|{{states(''input_number.hue'')}}|{{states(''input_number.saturation'')}}|{{states(''input_select.mirror_mode'')}}|{{states(''sun.sun'')}}|{{states(''input_select.mirror_pattern'')}}|{{states(''input_select.mirror_force_weather'')}}'
+```
 6. Restart Home Assistant
 7. Short UI control (requires `slider-entity-row`, `rgb-light-card`):
 ```yaml
