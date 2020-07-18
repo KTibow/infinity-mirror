@@ -8,6 +8,13 @@ void setup() {
   LEDS.setBrightness(84);
   Serial.begin(115200);
   showString(F("o......"), 0);
+  IPAddress staticIP(192, 168, 1, 97);
+  IPAddress gateway(192, 168, 1, 1);
+  IPAddress subnet(255, 255, 255, 0);
+  IPAddress dns1(1, 1, 1, 1);
+  IPAddress dns2(1, 0, 0, 1);
+  WiFi.config(staticIP, gateway, subnet, dns1, dns2);
+  delay(20);
   WiFi.disconnect(true);
   delay(500);
   showString(F("Wo....."), 0);
@@ -97,4 +104,13 @@ void setup() {
   messages[2] = "";
   messages[3] = "";
   messages[4] = "";
+  HTTPClient httpupdate;
+  httpupdate.begin("https://" + HA_URL + "/api/services/shell_command/update_mirror");
+  httpupdate.addHeader("Content-Type", "application/json");
+  httpupdate.POST("");
+  httpupdate.end();
+  unsigned long tt = millis();
+  while (millis() - tt < 300) {
+    server.handleClient();
+  }
 }
