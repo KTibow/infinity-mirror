@@ -1,92 +1,70 @@
-void updateHA() {
+void updateHA(String resp) {
   Serial.println(F("Updating HA..."));
-  int count = 0;
-  int httpCodeHA = -101;
-  while (httpCodeHA != 200 && count < 6) {
-    HTTPClient httpHA;
-    httpHA.begin("https://" + localip + "/api/states/sensor.mtms");
-    httpHA.addHeader("Authorization", "Bearer " + HA_TOKEN);
-    httpHA.addHeader("Content-Type", "application/json");
-    Serial.println(F("Getting..."));
-    httpCodeHA = httpHA.GET();
-    delay(500);
-    if (httpCodeHA == 200) {
-      bool changed = false;
-      String resp = httpHA.getString();
-      resp = getValue(resp, "\"", "state", 2);
-      Serial.println(resp);
-      weather = getValue(resp, '|', 0);
-      if (getValue(resp, '|', 1) == "on") {
-        if (ison != true) {
-          changed = true;
-        }
-        ison = true;
-      } else {
-        if (ison != false) {
-          changed = true;
-        }
-        ison = false;
-      }
-      if (brightness != round(getValue(resp, '|', 2).toInt())) {
-        bool itsdark = brightness == round(round(getValue(resp, '|', 2).toInt()) / 2.0);
-        if (!(is_night && itsdark)) {
-          changed = true;
-        }
-      }
-      if (getValue(resp, '|', 6) == "below_horizon") {
-        is_night = true;
-      } else {
-        is_night = false;
-      }
-      brightness = round(getValue(resp, '|', 2).toInt());
-      if (is_night) {
-        brightness = round(brightness / 2.0);
-      }
-      if (hue != round(getValue(resp, '|', 3).toInt())) {
-        changed = true;
-      }
-      hue = round(getValue(resp, '|', 3).toInt());
-      if (saturation != round(getValue(resp, '|', 4).toInt())) {
-        changed = true;
-      }
-      saturation = round(getValue(resp, '|', 4).toInt());
-      if (modeuse != getValue(resp, '|', 5) && millis() - lastmodified < 600000) {
-        changed = true;
-      }
-      modeuse = getValue(resp, '|', 5);
-      if (pattern != getValue(resp, '|', 7)) {
-        changed = true;
-      }
-      pattern = getValue(resp, '|', 7);
-      if (weatherpattern != getValue(resp, '|', 8)) {
-        changed = true;
-      }
-      weatherpattern = getValue(resp, '|', 8);
-      if (changed) {
-        lastmodified = millis();
-      }
-      Serial.println("Weather: " + weather +
-                     " Is on: " + String(ison) +
-                     " Brightness: " + String(brightness) +
-                     " Hue: " + String(hue) +
-                     " Saturation: " + String(saturation) +
-                     " Mode: " + modeuse +
-                     " Sun up: " + String(is_night) +
-                     " Pattern: " + pattern +
-                     " Weather pattern: " + weatherpattern +
-                     " Last changed (millis): " + String(lastmodified));
-    } else {
-      Serial.println("Error " + String(httpHA.getString()));
+  bool changed = false;
+  Serial.println(resp);
+  weather = getValue(resp, '|', 0);
+  if (getValue(resp, '|', 1) == "on") {
+    if (ison != true) {
+      changed = true;
     }
-    httpHA.end();
-    count++;
+    ison = true;
+  } else {
+    if (ison != false) {
+      changed = true;
+    }
+    ison = false;
   }
+  if (brightness != round(getValue(resp, '|', 2).toInt())) {
+    bool itsdark = brightness == round(round(getValue(resp, '|', 2).toInt()) / 2.0);
+    if (!(is_night && itsdark)) {
+      changed = true;
+    }
+  }
+  if (getValue(resp, '|', 6) == "below_horizon") {
+    is_night = true;
+  } else {
+    is_night = false;
+  }
+  brightness = round(getValue(resp, '|', 2).toInt());
+  if (is_night) {
+    brightness = round(brightness / 2.0);
+  }
+  if (hue != round(getValue(resp, '|', 3).toInt())) {
+    changed = true;
+  }
+  hue = round(getValue(resp, '|', 3).toInt());
+  if (saturation != round(getValue(resp, '|', 4).toInt())) {
+    changed = true;
+  }
+  saturation = round(getValue(resp, '|', 4).toInt());
+  if (modeuse != getValue(resp, '|', 5) && millis() - lastmodified < 600000) {
+    changed = true;
+  }
+  modeuse = getValue(resp, '|', 5);
+  if (pattern != getValue(resp, '|', 7)) {
+    changed = true;
+  }
+  pattern = getValue(resp, '|', 7);
+  if (weatherpattern != getValue(resp, '|', 8)) {
+    changed = true;
+  }
+  weatherpattern = getValue(resp, '|', 8);
+  if (changed) {
+    lastmodified = millis();
+  }
+  Serial.println("Weather: " + weather +
+                  " Is on: " + String(ison) +
+                  " Brightness: " + String(brightness) +
+                  " Hue: " + String(hue) +
+                  " Saturation: " + String(saturation) +
+                  " Mode: " + modeuse +
+                  " Sun up: " + String(is_night) +
+                  " Pattern: " + pattern +
+                  " Weather pattern: " + weatherpattern +
+                  " Last changed (millis): " + String(lastmodified));
 }
 void updateStuff(void * pvParameters) {
   while (true) {
-    for (int i = 0; i < 5; i++) {
-      updateHA();
-    }
     Serial.println(F("Updating time..."));
     HTTPClient httptime;
     const static char apiurl[] PROGMEM = "https://worldtimeapi.org/api/ip";
@@ -111,8 +89,7 @@ void updateStuff(void * pvParameters) {
       }
       count++;
     }
-    for (int i = 0; i < 5; i++) {
-      updateHA();
-    }
+    httptime.end();
+    delay(random(850, 1150));
   }
 }
