@@ -173,8 +173,13 @@ sensor:
       mtms:
         value_template: '{{states(''weather.kbfi_hourly'')}}|{{states(''input_text.mirror_status'')}}|{{states(''input_number.mirror_brightness'')}}|{{states(''input_number.hue'')}}|{{states(''input_number.saturation'')}}|{{states(''input_select.mirror_mode'')}}|{{states(''sun.sun'')}}|{{states(''input_select.mirror_pattern'')}}|{{states(''input_select.mirror_force_weather'')}}'
 ```
-6. Restart Home Assistant
-7. Short UI control (requires `slider-entity-row`, `rgb-light-card`):
+7. Add this command to your `configuration.yaml`:
+```yaml
+shell_command:
+  update_mirror: '/usr/bin/curl "http://192.168.1.97/collect?info={{states(''sensor.mtms'')}}"'
+```
+8. Restart Home Assistant
+9. Short UI control (requires `slider-entity-row`, `rgb-light-card`):
 ```yaml
 entities:
   - entity: light.infinity_mirror
@@ -229,14 +234,19 @@ Make sure you include this automation:
   trigger:
   - entity_id: sensor.currentcolor
     platform: state
-  condition: []
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_select.mirror_mode
+      state: Clock
   action:
   - data:
       option: Light
     entity_id: input_select.mirror_mode
     service: input_select.select_option
 ```
-8. More UI control with `light-entity-card`:
+10. More UI control with `light-entity-card`:
 ```yaml
 entities:
   - entity: light.infinity_mirror
@@ -268,7 +278,7 @@ type: entities
 ## Set up your enviroment and upload
 1. Make sure the [Arduino IDE](https://www.arduino.cc/en/Main/Software) is installed, and set up for HelTec's board. [Here's HelTec's guide.](https://heltec-automation-docs.readthedocs.io/en/latest/esp32+arduino/quick_start.html#via-arduino-board-manager)
 2. Download [the zip](https://github.com/KTibow/infinity-mirror/archive/master.zip), unzip it, and open `mirror.ino` in `mirror`.
-3. Open `token.h` and change the stuff, and open `mirror.ino` and change the number of LEDS.
+3. Open `token.h` and change the stuff, and open `mirror.ino` and change the number of LEDS. You might also need to change your gateway, subnet, and DNS IP addresses in `setup.h`.
 4. Upload it!
 ## You're done!
 Let me know if you have any problems [in an issue](https://github.com/KTibow/infinity-mirror/issues/new). BTW: You can upload a compiled binary at `esp32.local` with username and password `program`.
