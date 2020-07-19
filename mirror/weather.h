@@ -52,6 +52,8 @@ String tellweather(bool prettyname) {
       weatheroption = F("mostly_cloudy_night");
     } else if (weather == F("lightning-rainy")) {
       weatheroption = F("storm_night");
+    } else if (weather == F("mostly_cloudy")) {
+      weatheroption = F("mostly_cloudy_night");
     }
   }
   if (prettyname) {
