@@ -107,6 +107,7 @@ void setup() {
   HTTPClient httpupdate;
   httpupdate.begin("https://" + HA_URL + "/api/services/shell_command/update_mirror");
   httpupdate.addHeader("Content-Type", "application/json");
+  httpupdate.addHeader("Authorization", "Bearer " + HA_TOKEN);
   httpupdate.POST("");
   httpupdate.end();
   unsigned long tt = millis();
