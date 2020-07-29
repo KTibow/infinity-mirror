@@ -131,55 +131,50 @@ Yahoo! You've done most of the hardware.
   - Icon: `mdi:mirror`
   - Maximum length: 10
   - Leave everything else
-5. Add this light to your `configuration.yaml`:
+5. Add this stuff to your `configuration.yaml`:
 ```yaml
-- platform: template
-  lights:
-    infinity_mirror:
-      friendly_name: Infinity Mirror
-      value_template: '{{is_state(''input_text.mirror_status'', ''on'')}}'
-      level_template: '{{((states(''input_number.mirror_brightness'') | int - 10) / 68 * 100) | int}}'
-      color_template: '({{(states(''input_number.hue'') | int / 255 * 360) | int}}, {{(states(''input_number.saturation'') | int / 255 * 100) | int}})'
-      turn_on:
-        service: input_text.set_value
-        data:
-          entity_id: input_text.mirror_status
-          value: 'on'
-      turn_off:
-        service: input_text.set_value
-        data:
-          entity_id: input_text.mirror_status
-          value: 'off'
-      set_level:
-        service: input_number.set_value
-        data_template:
-          entity_id: input_number.mirror_brightness
-          value: '{{(brightness | int / 100 * 68 + 10) | int}}'
-      set_color:
-        - service: input_number.set_value
+light:
+  - platform: template
+    lights:
+      infinity_mirror:
+        friendly_name: Infinity Mirror
+        value_template: '{{is_state(''input_text.mirror_status'', ''on'')}}'
+        level_template: '{{((states(''input_number.mirror_brightness'') | int - 10) / 68 * 100) | int}}'
+        color_template: '({{(states(''input_number.hue'') | int / 255 * 360) | int}}, {{(states(''input_number.saturation'') | int / 255 * 100) | int}})'
+        turn_on:
+          service: input_text.set_value
+          data:
+            entity_id: input_text.mirror_status
+            value: 'on'
+        turn_off:
+          service: input_text.set_value
+          data:
+            entity_id: input_text.mirror_status
+            value: 'off'
+        set_level:
+          service: input_number.set_value
           data_template:
-            value: "{{(h | int / 360 * 255) | int}}"
-            entity_id: input_number.hue
-        - service: input_number.set_value
-          data_template:
-            value: "{{(s | int / 100 * 255) | int}}"
-            entity_id: input_number.saturation
-```
-6. Add this template sensor to your `configuration.yaml`:
-```yaml
+            entity_id: input_number.mirror_brightness
+            value: '{{(brightness | int / 100 * 68 + 10) | int}}'
+        set_color:
+          - service: input_number.set_value
+            data_template:
+              value: "{{(h | int / 360 * 255) | int}}"
+              entity_id: input_number.hue
+          - service: input_number.set_value
+            data_template:
+              value: "{{(s | int / 100 * 255) | int}}"
+              entity_id: input_number.saturation
 sensor:
   - platform: template
     sensors:
       mtms:
         value_template: '{{states(''weather.kbfi_hourly'')}}|{{states(''input_text.mirror_status'')}}|{{states(''input_number.mirror_brightness'')}}|{{states(''input_number.hue'')}}|{{states(''input_number.saturation'')}}|{{states(''input_select.mirror_mode'')}}|{{states(''sun.sun'')}}|{{states(''input_select.mirror_pattern'')}}|{{states(''input_select.mirror_force_weather'')}}'
-```
-7. Add this command to your `configuration.yaml`:
-```yaml
 shell_command:
-  update_mirror: '/usr/bin/curl "http://192.168.1.97/collect?info={{states(''sensor.mtms'')}}"'
+  update_mirror: '/usr/bin/curl -d "info={{states(''sensor.mtms'')}}" "http://192.168.1.97/collect"'
 ```
-8. Restart Home Assistant
-9. Short UI control (requires `slider-entity-row`, `rgb-light-card`):
+6. Restart Home Assistant
+7. UI control option #1 (requires `slider-entity-row`, `rgb-light-card`):
 ```yaml
 entities:
   - entity: light.infinity_mirror
@@ -226,27 +221,7 @@ entities:
 show_header_toggle: false
 type: entities
 ```
-Make sure you include this automation:
-```yaml
-- id: 'turn_on_light_when_color_changes'
-  alias: Set mode to light when color changes
-  description: ''
-  trigger:
-  - entity_id: sensor.currentcolor
-    platform: state
-  condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: input_select.mirror_mode
-      state: Clock
-  action:
-  - data:
-      option: Light
-    entity_id: input_select.mirror_mode
-    service: input_select.select_option
-```
-10. More UI control with `light-entity-card`:
+8. UI control option #2 with `light-entity-card`:
 ```yaml
 entities:
   - entity: light.infinity_mirror
@@ -275,7 +250,7 @@ show_header_toggle: false
 title: Infinity mirror
 type: entities
 ```
-11. And add this automation too, so HA can tell the mirror when anything changes:
+9. And add this automation too, so HA can tell the mirror when anything changes:
 ```yaml
 - id: 'let_mirror_know_when_status_changes'
   alias: Let mirror know when anything changes
