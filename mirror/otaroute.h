@@ -6,7 +6,7 @@ server.on("/serverIndex", HTTP_GET, []() {
 server.sendHeader("Connection", "close");
 server.send(200, "text/html", serverIndex);
 });
-server.on("/collect", HTTP_GET, []() {
+server.on("/collect", HTTP_POST, []() {
 int paramsNr = server.args();
 String message = "Recieved. Param number: ";
 message += paramsNr;
