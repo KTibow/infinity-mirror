@@ -136,7 +136,7 @@ void loop() {
         }
       }
     } else if (modeuse == F("More patterns")) {
-      if (pattern == F("Cyan + Magenta")) {
+      if (pattern == F("Cyan and Magenta")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness);
@@ -144,7 +144,7 @@ void loop() {
             leds[i] = CHSV(128, 255, brightness);
           }
         }
-      } else if (pattern == F("Cyan + Orange")) {
+      } else if (pattern == F("Cyan and Orange")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(31, 255, brightness);
@@ -152,7 +152,7 @@ void loop() {
             leds[i] = CHSV(128, 255, brightness);
           }
         }
-      } else if (pattern == F("Cyan + Green")) {
+      } else if (pattern == F("Cyan and Green")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(85, 255, brightness);
@@ -160,7 +160,7 @@ void loop() {
             leds[i] = CHSV(128, 255, brightness);
           }
         }
-      } else if (pattern == F("Cyan + Purple")) {
+      } else if (pattern == F("Cyan and Purple")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness / 2);
@@ -168,7 +168,7 @@ void loop() {
             leds[i] = CHSV(128, 255, brightness);
           }
         }
-      } else if (pattern == F("Orange + Magenta")) {
+      } else if (pattern == F("Orange and Magenta")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness);
@@ -176,7 +176,7 @@ void loop() {
             leds[i] = CHSV(26, 255, brightness);
           }
         }
-      } else if (pattern == F("Orange + Green")) {
+      } else if (pattern == F("Orange and Green")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(90, 255, brightness);
@@ -184,7 +184,7 @@ void loop() {
             leds[i] = CHSV(26, 255, brightness);
           }
         }
-      } else if (pattern == F("Orange + Purple")) {
+      } else if (pattern == F("Orange and Purple")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness / 2);
@@ -192,7 +192,7 @@ void loop() {
             leds[i] = CHSV(26, 255, brightness);
           }
         }
-      } else if (pattern == F("Green + Magenta")) {
+      } else if (pattern == F("Green and Magenta")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness);
@@ -200,7 +200,7 @@ void loop() {
             leds[i] = CHSV(85, 255, brightness);
           }
         }
-      } else if (pattern == F("Green + Purple")) {
+      } else if (pattern == F("Green and Purple")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness / 2);
@@ -208,7 +208,7 @@ void loop() {
             leds[i] = CHSV(85, 255, brightness);
           }
         }
-      } else if (pattern == F("Purple + Magenta")) {
+      } else if (pattern == F("Purple and Magenta")) {
         for (int i = 0; i < NUM_LEDS; i++) {
           if ((i % 8 < 4) ^ (ln % 10 < 5)) {
             leds[i] = CHSV(213, 255, brightness);
