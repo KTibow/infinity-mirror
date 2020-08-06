@@ -112,16 +112,16 @@ Yahoo! You've done most of the hardware.
   - Icon: `mdi:mirror`
   - <details><summary>Options:</summary>
 
-    - Cyan + Magenta
-    - Cyan + Orange
-    - Cyan + Green
-    - Cyan + Purple
-    - Orange + Magenta
-    - Orange + Green
-    - Orange + Purple
-    - Green + Magenta
-    - Green + Purple
-    - Purple + Magenta
+    - Cyan and Magenta
+    - Cyan and Orange
+    - Cyan and Green
+    - Cyan and Purple
+    - Orange and Magenta
+    - Orange and Green
+    - Orange and Purple
+    - Green and Magenta
+    - Green and Purple
+    - Purple and Magenta
 </details>
 
   - Leave everything else
