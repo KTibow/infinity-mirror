@@ -47,11 +47,12 @@ Note: Don't put the battery base back on, not even later.
 
 Yahoo! You've done most of the hardware.
 ## Set up the connections
-1. Find your WiFi Kit 32 and solder headers.
+1. Find your WiFi Kit 32.
 2. Place it in the middle of your breadboard.
-3. Put one wire at pin 5. Put the other two at 5V and GND.
-4. Put the pin 5 wire to the middle, green wire of the connector.
-5. Put the 5V wire to the red wire of the connector, and the GND wire to the white wire of the connector.
+3. If the header's aren't soldered on yet, solder them on now.
+4. Put one wire at pin 5. Put the other two at 5V and GND.
+5. Put the pin 5 wire to the middle, green wire of the connector.
+6. Put the 5V wire to the red wire of the connector, and the GND wire to the white wire of the connector.
 ## Set up Home Assistant
 1. Add the Local IP integration using the GUI.
 2. Add these `input_number` helpers:
