@@ -132,7 +132,7 @@ Yahoo! You've done most of the hardware.
   - Icon: `mdi:mirror`
   - Maximum length: 10
   - Leave everything else
-5. Add this stuff to your `configuration.yaml`:
+5. Add this stuff to your `configuration.yaml` (replace `weather.kbfi_hourly` with your weather sensor):
 ```yaml
 light:
   - platform: template
@@ -270,4 +270,4 @@ type: entities
 3. Open `token.h` and change the stuff, and open `mirror.ino` and change the number of LEDS. You might also need to change your gateway, subnet, and DNS IP addresses in `setup.h`.
 4. Upload it!
 ## You're done!
-Let me know if you have any problems [in an issue](https://github.com/KTibow/infinity-mirror/issues/new). BTW: You can upload a compiled binary at `esp32.local` with username and password `program`.
+Let me know if you have any problems [in an issue](https://github.com/KTibow/infinity-mirror/issues/new). BTW: You can upload via a custom OTA web server with [these instructions](https://github.com/KTibow/esp32-ota#upload-sketch), so you don't have to physically plug it in to your computer as long as it has power.
