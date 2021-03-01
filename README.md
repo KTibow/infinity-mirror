@@ -264,7 +264,7 @@ type: entities
   - data: {}
     service: shell_command.update_mirror
 ```
-## Set up your enviroment and upload
+## Set up your environment and upload
 1. Make sure the [Arduino IDE](https://www.arduino.cc/en/Main/Software) is installed, and set up for HelTec's board. [Here's HelTec's guide.](https://heltec-automation-docs.readthedocs.io/en/latest/esp32+arduino/quick_start.html#via-arduino-board-manager)
 2. Download [the zip](https://github.com/KTibow/infinity-mirror/archive/master.zip), unzip it, and open `mirror.ino` in `mirror`.
 3. Open `token.h` and change the stuff, and open `mirror.ino` and change the number of LEDS. You might also need to change your gateway, subnet, and DNS IP addresses in `setup.h`.
